@@ -1,0 +1,60 @@
+states
+
+common base state
+
+-wandering
+	while nothing is nearby, wander randomly
+	
+	Random wandering:
+
+		add or subtract from x and y cooridante randomly
+		this needs to be kept track of to make sure they dont just walk in circles:
+		x+,y+ --> NE
+		x+,y- --> SE
+		x-,y+ --> NW
+		x-,y- --> SW
+		x+ --> E
+		x- --> W
+		y+ --> N
+		y- --> S
+		These values will only be incremented by 1 so the pixels dont jump around too
+		frantically. Also wont have to worry about cases like this: x + 1, y + 10 which
+		isnt really NE as the above states but just N
+
+		The last 10 moves will be tracked in a stack. Previous movements in the stack will
+		affect the probability of where the next move will be
+		
+		Deciding where to move:
+		
+		The first move, each direction has an equal chance.
+		x+,y+ --> NE 0.125
+		x+,y- --> SE 0.125
+		x-,y+ --> NW 0.125
+		x-,y- --> SW 0.125
+		x+ --> E 0.125
+		x- --> W 0.125
+		y+ --> N 0.125
+		y- --> S 0.125
+		
+		As the directions are recorded in the stack, these probabilities will be adjusted:
+		TODO figure out how to do this lol
+		
+
+
+Species specific
+Herbivore
+-forage
+	If nothing is nearby, continue wandering
+	If food is within x pixels, approach it
+	
+
+Carnivore
+-hunt
+	if no other creature nearby, continue hunting
+	if other creature nearby, attack
+	
+
+
+
+
+
